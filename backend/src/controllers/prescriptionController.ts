@@ -11,7 +11,7 @@ export const getPatientPrescriptions = async (
     const { id } = req.params;
 
     const prescriptions = await prisma.prescription.findMany({
-      where: { userId: parseInt(id) },
+      where: { userId: parseInt(id as string) },
       orderBy: { refillOn: 'asc' },
     });
 
@@ -72,7 +72,7 @@ export const createPrescription = async (
 
     const prescription = await prisma.prescription.create({
       data: {
-        userId: parseInt(id),
+        userId: parseInt(id as string),
         medication,
         dosage,
         quantity,
@@ -98,7 +98,7 @@ export const updatePrescription = async (
       req.body as UpdatePrescriptionRequest;
 
     const prescription = await prisma.prescription.update({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
       data: {
         ...(medication && { medication }),
         ...(dosage && { dosage }),
@@ -123,7 +123,7 @@ export const deletePrescription = async (
     const { id } = req.params;
 
     await prisma.prescription.delete({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
     });
 
     res.status(204).send();
