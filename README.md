@@ -2,6 +2,19 @@
 
 A full-stack Electronic Medical Records (EMR) and Patient Portal application built with modern web technologies.
 
+## 🚀 Live Demo
+
+- **Application**: https://zealthy-zeta.vercel.app/
+- **Admin Interface**: https://zealthy-zeta.vercel.app/admin
+- **Backend API**: https://charismatic-joy-production-13c1.up.railway.app/
+- **GitHub**: https://github.com/surajbitla25/zealthy
+
+**Demo Credentials:**
+- Email: `mark@some-email-provider.net`
+- Password: `Password123!`
+
+---
+
 ## Project Overview
 
 This application consists of two main sections:
@@ -13,7 +26,7 @@ This application consists of two main sections:
 
 ### Backend
 - **Node.js** + **Express** + **TypeScript**
-- **Prisma ORM** with **PostgreSQL**
+- **Prisma ORM** with **PostgreSQL** (schema-first with `db push`)
 - **JWT** authentication with **bcrypt** password hashing
 - RESTful API architecture
 
@@ -101,10 +114,12 @@ PORT=3001
 NODE_ENV=development
 ```
 
-4. Run Prisma migrations:
+4. Sync the database schema:
 ```bash
-npx prisma migrate dev --name init
+npx prisma db push
 ```
+
+**Note**: This project uses Prisma's `db push` (schema-first approach) for rapid development instead of migrations.
 
 5. Seed the database:
 ```bash
@@ -186,8 +201,11 @@ Use these credentials to log in to the Patient Portal:
 
 ## Deployment
 
-### Backend Deployment (Railway/Render)
+**See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete step-by-step deployment instructions.**
 
+### Quick Deployment Overview
+
+**Backend (Railway recommended):**
 1. Create a PostgreSQL database on Railway or Render
 2. Set environment variables:
    - `DATABASE_URL`
@@ -195,17 +213,20 @@ Use these credentials to log in to the Patient Portal:
    - `PORT`
    - `NODE_ENV=production`
 3. Deploy the backend directory
-4. Run migrations: `npx prisma migrate deploy`
-5. Seed the database: `npm run prisma:seed`
+4. Schema sync and seeding run automatically via the start command
 
-### Frontend Deployment (Vercel)
-
+**Frontend (Vercel):**
 1. Connect your repository to Vercel
-2. Set build command: `npm run build`
-3. Set output directory: `dist`
+2. Set root directory: `frontend`
+3. Framework preset: Vite
 4. Set environment variable:
-   - `VITE_API_URL=<your-backend-url>`
+   - `VITE_API_URL=https://charismatic-joy-production-13c1.up.railway.app`
 5. Deploy
+
+**Live Demo:**
+- Frontend: https://zealthy-zeta.vercel.app/
+- Backend API: https://charismatic-joy-production-13c1.up.railway.app/
+- GitHub: https://github.com/surajbitla25/zealthy
 
 ## Security Features
 
@@ -224,6 +245,23 @@ Use these credentials to log in to the Patient Portal:
 - Error handling throughout
 - Modular architecture
 - Separation of concerns
+
+## Database Approach
+
+This project uses **Prisma's `db push`** (schema-first approach) instead of migrations:
+
+**Why `db push`?**
+- ✅ Faster iteration during development
+- ✅ Perfect for prototypes and demos
+- ✅ Simpler deployment (no migration history to manage)
+- ✅ Schema is the single source of truth
+
+**When to switch to migrations?**
+- When you need production rollback capability
+- When you need to preserve data during schema changes
+- When you have a complex deployment pipeline
+
+For this demo application, `db push` is the optimal choice.
 
 ## Future Enhancements
 

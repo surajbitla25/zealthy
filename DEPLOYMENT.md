@@ -2,6 +2,27 @@
 
 This guide provides step-by-step instructions for deploying the Zealthy EMR application.
 
+## 🌐 Live Deployment
+
+**This application is already deployed at:**
+- **Frontend**: https://zealthy-zeta.vercel.app/
+- **Backend API**: https://charismatic-joy-production-13c1.up.railway.app/
+- **GitHub Repository**: https://github.com/surajbitla25/zealthy
+
+The guide below explains how this deployment was set up.
+
+---
+
+## Important Note: Database Schema Management
+
+This project uses **Prisma's `db push`** instead of traditional migrations:
+- ✅ Simpler deployment process
+- ✅ Perfect for demos and rapid development
+- ✅ Schema file (`schema.prisma`) is the single source of truth
+- ✅ No migration files to manage
+
+All deployment commands use `npx prisma db push --accept-data-loss` to sync the schema with the database.
+
 ## Prerequisites
 
 - GitHub account
@@ -39,17 +60,28 @@ NODE_ENV=production
 
 Note: `${{Postgres.DATABASE_URL}}` is automatically provided by Railway when you add PostgreSQL.
 
-### Step 4: Configure Build & Start Commands
+### Step 4: Verify Configuration (Pre-configured!)
 
-In Railway settings:
-- **Build Command**: `npm install && npx prisma generate && npm run build`
-- **Start Command**: `npx prisma migrate deploy && npm run prisma:seed && npm start`
+The project includes a `railway.json` file that automatically configures:
+
+**Build Command**: `npm install && npx prisma generate && npm run build`  
+**Start Command**: `npx prisma db push --accept-data-loss && npm run prisma:seed && npm start`
+
+Railway will automatically detect and use these settings. No manual configuration needed!
+
+**What happens on deployment:**
+1. Dependencies are installed
+2. Prisma client is generated
+3. TypeScript is compiled
+4. Database schema is synced (via `db push`)
+5. Sample data is seeded
+6. Server starts
 
 ### Step 5: Deploy
 
 1. Click "Deploy" in Railway
 2. Wait for the deployment to complete
-3. Note your backend URL (e.g., `https://your-app.railway.app`)
+3. Your backend URL will be similar to: `https://charismatic-joy-production-13c1.up.railway.app`
 
 ## Backend Deployment (Render) - Alternative
 
@@ -73,7 +105,9 @@ If you prefer Render:
    - **Region**: Choose closest to you
    - **Branch**: main
    - **Build Command**: `npm install && npx prisma generate && npm run build`
-   - **Start Command**: `npx prisma migrate deploy && npm run prisma:seed && npm start`
+   - **Start Command**: `npx prisma db push --accept-data-loss && npm run prisma:seed && npm start`
+   
+   **Note**: This project uses Prisma's `db push` instead of migrations.
 
 ### Step 3: Environment Variables
 
@@ -106,40 +140,42 @@ NODE_ENV=production
 
 ### Step 3: Configure Project
 
-- **Framework Preset**: Vite
+- **Framework Preset**: Vite (auto-detected)
 - **Root Directory**: `frontend`
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
+- **Build Command**: `npm run build` (auto-detected)
+- **Output Directory**: `dist` (auto-detected)
+
+**Note**: The project includes a `vercel.json` that handles SPA routing automatically.
 
 ### Step 4: Environment Variables
 
 Add this environment variable:
 
 ```env
-VITE_API_URL=<your-backend-url>
+VITE_API_URL=https://charismatic-joy-production-13c1.up.railway.app
 ```
 
-For example:
-- Railway: `https://your-app.railway.app`
-- Render: `https://zealthy-backend.onrender.com`
+Replace with your actual backend URL from Railway or Render.
 
 ### Step 5: Deploy
 
 1. Click "Deploy"
 2. Wait for deployment to complete
-3. Your app will be live at `https://your-app.vercel.app`
+3. Your app will be live (example: `https://zealthy-zeta.vercel.app`)
 
 ## Post-Deployment Verification
 
 ### Test Backend
 
-Visit `https://your-backend-url/health` - should return:
+Visit your backend health endpoint (e.g., `https://charismatic-joy-production-13c1.up.railway.app/health`) - should return:
 ```json
 {
   "status": "OK",
   "timestamp": "2026-01-29T..."
 }
 ```
+
+Note: If you don't have a `/health` endpoint, you can test with `/api/reference/medications` to verify the API is running.
 
 ### Test Frontend
 
@@ -159,10 +195,12 @@ Visit `https://your-backend-url/health` - should return:
 - Check PostgreSQL instance is running
 - Ensure IP whitelist includes Render/Railway IPs (usually not needed)
 
-**Migrations Failed**
-- Run migrations manually: `npx prisma migrate deploy`
+**Database Schema Sync Failed**
+- This project uses `prisma db push` instead of migrations
+- Manually sync schema: `npx prisma db push --accept-data-loss`
 - Check database permissions
-- Verify Prisma schema is correct
+- Verify Prisma schema is correct in `prisma/schema.prisma`
+- Ensure DATABASE_URL is properly set
 
 **Seed Failed**
 - Check if data already exists (seed clears existing data)
@@ -181,8 +219,9 @@ Visit `https://your-backend-url/health` - should return:
 - Run `npm run build` locally first
 
 **Routes Not Working (404 on refresh)**
-- Verify `vercel.json` exists with rewrites configuration
-- Check Vercel deployment settings
+- The project includes `vercel.json` with rewrites for SPA routing
+- Verify the file is in the `frontend` directory
+- Check Vercel deployment logs for any build errors
 
 ## Security Checklist
 
@@ -200,7 +239,7 @@ Visit `https://your-backend-url/health` - should return:
 1. Push changes to GitHub
 2. Railway/Render will auto-deploy
 3. Monitor deployment logs
-4. If database schema changed, migrations run automatically
+4. If database schema changed, `prisma db push` runs automatically on startup
 
 ### Frontend Updates
 
