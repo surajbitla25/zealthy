@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-seed
 .env
 .env.local
 .DS_Store
@@ -7,3 +8,4 @@ dist
 coverage
 .vscode
 .idea
+prisma.config.ts
