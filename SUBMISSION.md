@@ -9,7 +9,7 @@
 ## 🔗 Live Demo & Repository
 
 **Frontend (Patient Portal & Admin EMR)**: https://zealthy-zeta.vercel.app/  
-**Backend API**: https://charismatic-joy-production-13c1.up.railway.app/  
+**Backend API Health Check**: https://charismatic-joy-production-13c1.up.railway.app/health  
 **GitHub Repository**: https://github.com/surajbitla25/zealthy
 
 ---

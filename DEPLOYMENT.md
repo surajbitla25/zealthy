@@ -6,7 +6,7 @@ This guide provides step-by-step instructions for deploying the Zealthy EMR appl
 
 **This application is already deployed at:**
 - **Frontend**: https://zealthy-zeta.vercel.app/
-- **Backend API**: https://charismatic-joy-production-13c1.up.railway.app/
+- **Backend API Health**: https://charismatic-joy-production-13c1.up.railway.app/health
 - **GitHub Repository**: https://github.com/surajbitla25/zealthy
 
 The guide below explains how this deployment was set up.
@@ -81,7 +81,7 @@ Railway will automatically detect and use these settings. No manual configuratio
 
 1. Click "Deploy" in Railway
 2. Wait for the deployment to complete
-3. Your backend URL will be similar to: `https://charismatic-joy-production-13c1.up.railway.app`
+3. Test your backend health endpoint: `https://charismatic-joy-production-13c1.up.railway.app/health`
 
 ## Backend Deployment (Render) - Alternative
 

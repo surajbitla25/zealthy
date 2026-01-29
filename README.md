@@ -6,7 +6,7 @@ A full-stack Electronic Medical Records (EMR) and Patient Portal application bui
 
 - **Application**: https://zealthy-zeta.vercel.app/
 - **Admin Interface**: https://zealthy-zeta.vercel.app/admin
-- **Backend API**: https://charismatic-joy-production-13c1.up.railway.app/
+- **Backend API**: https://charismatic-joy-production-13c1.up.railway.app/health
 - **GitHub**: https://github.com/surajbitla25/zealthy
 
 **Demo Credentials:**
@@ -225,7 +225,7 @@ Use these credentials to log in to the Patient Portal:
 
 **Live Demo:**
 - Frontend: https://zealthy-zeta.vercel.app/
-- Backend API: https://charismatic-joy-production-13c1.up.railway.app/
+- Backend API Health: https://charismatic-joy-production-13c1.up.railway.app/health
 - GitHub: https://github.com/surajbitla25/zealthy
 
 ## Security Features
