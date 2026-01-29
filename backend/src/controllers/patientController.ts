@@ -19,7 +19,7 @@ export const getAllPatients = async (req: Request, res: Response): Promise<void>
       orderBy: { name: 'asc' },
     });
 
-    const patientsResponse = patients.map((patient) => ({
+    const patientsResponse = patients.map((patient: any) => ({
       id: patient.id,
       name: patient.name,
       email: patient.email,
