@@ -41,7 +41,7 @@ export const getPatientById = async (req: Request, res: Response): Promise<void>
     const { id } = req.params;
 
     const patient = await prisma.user.findUnique({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
       include: {
         appointments: {
           orderBy: { datetime: 'asc' },
@@ -119,7 +119,7 @@ export const updatePatient = async (req: Request, res: Response): Promise<void> 
     const { name, email } = req.body as UpdateUserRequest;
 
     const patient = await prisma.user.update({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
       data: {
         ...(name && { name }),
         ...(email && { email }),
@@ -144,7 +144,7 @@ export const deletePatient = async (req: Request, res: Response): Promise<void> 
     const { id } = req.params;
 
     await prisma.user.delete({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
     });
 
     res.status(204).send();
