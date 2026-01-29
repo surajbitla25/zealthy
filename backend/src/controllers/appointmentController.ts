@@ -11,7 +11,7 @@ export const getPatientAppointments = async (
     const { id } = req.params;
 
     const appointments = await prisma.appointment.findMany({
-      where: { userId: parseInt(id) },
+      where: { userId: parseInt(id as string) },
       orderBy: { datetime: 'asc' },
     });
 
@@ -72,7 +72,7 @@ export const createAppointment = async (
 
     const appointment = await prisma.appointment.create({
       data: {
-        userId: parseInt(id),
+        userId: parseInt(id as string),
         provider,
         datetime: new Date(datetime),
         repeatSchedule,
@@ -97,7 +97,7 @@ export const updateAppointment = async (
       req.body as UpdateAppointmentRequest;
 
     const appointment = await prisma.appointment.update({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
       data: {
         ...(provider && { provider }),
         ...(datetime && { datetime: new Date(datetime) }),
@@ -121,7 +121,7 @@ export const deleteAppointment = async (
     const { id } = req.params;
 
     await prisma.appointment.delete({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(id as string) },
     });
 
     res.status(204).send();
