@@ -2,16 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  body {
+    @apply font-sans bg-cream-50 text-text-primary;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-text-primary;
+  }
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer components {
+  /* Professional gradient backgrounds */
+  .gradient-hero {
+    background: linear-gradient(135deg, #E9F7EE 0%, #FFFAF2 100%);
+  }
+
+  .gradient-card {
+    background: linear-gradient(to bottom right, #FFFFFF, #FFFAF2);
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-smooth hover:-translate-y-1 hover:shadow-medium;
+  }
+
+  /* Professional button styles */
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-xl font-semibold 
+           hover:bg-primary-dark transition-smooth shadow-soft 
+           hover:shadow-medium active:scale-95;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white px-6 py-3 rounded-xl font-semibold 
+           hover:bg-accent-dark transition-smooth shadow-soft 
+           hover:shadow-medium active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-xl font-semibold 
+           hover:bg-primary hover:text-white transition-smooth 
+           active:scale-95;
+  }
+
+  /* Professional card */
+  .card-professional {
+    @apply bg-white rounded-2xl p-6 shadow-soft hover-lift;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-success {
+    @apply bg-mint-50 text-primary;
+  }
+
+  .badge-info {
+    @apply bg-blue-50 text-blue-700;
+  }
+
+  /* Input styles */
+  .input-professional {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl
+           focus:border-primary focus:ring-2 focus:ring-primary/20
+           transition-smooth bg-white text-text-primary;
+  }
 }
