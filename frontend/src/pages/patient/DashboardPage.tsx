@@ -17,6 +17,7 @@ export const DashboardPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true); // Reset loading state
       try {
         const [appointments, refills] = await Promise.all([
           appointmentService.getUpcomingAppointments(),
@@ -107,7 +108,7 @@ export const DashboardPage: React.FC = () => {
           <Card className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-text-secondary text-sm font-medium mb-1">Upcoming</p>
+                <p className="text-text-secondary text-sm font-medium mb-1">Next 7 Days</p>
                 <p className="text-3xl font-bold text-primary">{upcomingAppointments.length}</p>
                 <p className="text-text-secondary text-sm mt-1">Appointments</p>
               </div>
@@ -122,9 +123,9 @@ export const DashboardPage: React.FC = () => {
           <Card className="bg-gradient-to-br from-green-50 to-white border-2 border-green-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-text-secondary text-sm font-medium mb-1">Active</p>
+                <p className="text-text-secondary text-sm font-medium mb-1">Next 7 Days</p>
                 <p className="text-3xl font-bold text-primary">{upcomingRefills.length}</p>
-                <p className="text-text-secondary text-sm mt-1">Prescriptions</p>
+                <p className="text-text-secondary text-sm mt-1">Refills Due</p>
               </div>
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">

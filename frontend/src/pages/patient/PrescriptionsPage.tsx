@@ -17,6 +17,7 @@ export const PrescriptionsPage: React.FC = () => {
     const fetchPrescriptions = async () => {
       if (!user) return;
       
+      setIsLoading(true); // Reset loading state
       try {
         const data = await prescriptionService.getPatientPrescriptions(user.id);
         setPrescriptions(data);

@@ -28,6 +28,7 @@ export const PatientDetailPage: React.FC = () => {
   const fetchPatient = async () => {
     if (!id) return;
     
+    setIsLoading(true); // Reset loading state
     try {
       const data = await patientService.getPatientById(parseInt(id));
       setPatient(data);

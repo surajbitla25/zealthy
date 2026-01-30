@@ -17,6 +17,7 @@ export const AppointmentsPage: React.FC = () => {
     const fetchAppointments = async () => {
       if (!user) return;
       
+      setIsLoading(true); // Reset loading state
       try {
         const data = await appointmentService.getPatientAppointments(user.id);
         // Filter appointments for next 3 months

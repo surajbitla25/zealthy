@@ -16,6 +16,7 @@ export const PatientListPage: React.FC = () => {
   }, []);
 
   const fetchPatients = async () => {
+    setIsLoading(true); // Reset loading state
     try {
       const data = await patientService.getAllPatients();
       setPatients(data);
